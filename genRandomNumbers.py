@@ -16,6 +16,8 @@ root = args.location + "/randomFiles/"
 
 
 def gen_files(location, currentDepth):
+    # Generate some files
+    makeFiles(location, location)
     # If we are at the desired depth return
     if currentDepth == args.depth:
         return
@@ -27,8 +29,6 @@ def gen_files(location, currentDepth):
             dirName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=args.size))
             os.mkdir(location + dirName)
             print("tying to make file: " + location + dirName)
-        # Generate some files
-        makeFiles(location, dirName)
         # Make the files in this dir recursively
         gen_files(location + dirName + "/", currentDepth + 1)
 
@@ -37,8 +37,8 @@ def makeFiles(location, dirName):
     for f in range(0, args.files):
         fileName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=args.size))
         fileContents = ''.join(random.choices(string.ascii_uppercase + string.digits, k=args.contents))
-        print("Writing: " + fileContents + " to: " + location + dirName + fileName + ".txt")
-        f = open(location + dirName + '/' + fileName + ".txt", "w")
+        print("Writing: " + fileContents + " to: " + location + fileName + ".txt")
+        f = open(location + fileName + ".txt", "w")
         f.write(fileContents)
         f.close()
 
